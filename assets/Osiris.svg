@@ -1,0 +1,22 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 307" width="360" height="307">
+	<title>Osiris</title>
+	<defs>
+		<image  width="1280" height="720" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABQAAAALQAQMAAAD1s08VAAAAAXNSR0IB2cksfwAAAANQTFRF////p8QbyAAAAIdJREFUeJztwTEBAAAAwqD1T20JT6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeBrE3wABB8CymgAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+		tspan { white-space:pre }
+		.s0 { fill: #3877e1 } 
+		.s1 { fill: #fdf47a } 
+		.s2 { fill: #7dd8fb } 
+		.s3 { fill: #ff817a } 
+		.s4 { fill: #20b66d } 
+	</style>
+	<use id="Background" href="#img1" x="-454" y="-178" />
+	<g id="Folder 2 copy 2">
+		<path id="Shape 13 copy 5" class="s0" d="m64 59l52.01 0l0 52.01l-52.01 0l0-52.01z" />
+		<path id="Shape 13 copy 6" class="s1" d="m140.98 108.93h52.01v52.01h-52.01v-52.01z" />
+		<path id="Shape 13 copy 7" class="s2" d="m140.98 160.94h52.01v52.01h-52.01v-52.01z" />
+		<path id="Shape 13 copy 8" class="s3" d="m192.99 135.98l52.01 0v52.01l-52.01 0v-52.01z" />
+		<path id="Shape 13 copy 9" class="s4" d="m88.97 212.95h52.01v52.01h-52.01v-52.01z" />
+	</g>
+</svg>
