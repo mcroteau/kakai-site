@@ -13,7 +13,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap');
     </style>
     <style>
-        body{font-family: Arial;font-size:12px;}
+        body{background: #f3ffff;font-family: Arial;font-size:12px;}
         body,div,span,h1,h2,h3,h4,p,li,a{font-family: 'Roboto'; font-weight: 300; line-height: 1.0em;}
         h1{font-size:34px;}
         h2{font-size:25px; font-weight: 800}
@@ -29,7 +29,7 @@
         #navigation{float:right;}
         #navigation li{list-style: none;float:right;margin:0px 10px;}
         #navigation a{font-size:19px;text-decoration: none;color:#000; }
-        .kakai{color:#f83492}
+        .kakai{border-left:solid 9px #f9ff00;color:#f83492}
         pre{
             font-size:14px;
             margin:0px auto 40px;
@@ -58,6 +58,13 @@
             margin:0px auto 20px;
         }
         .clear{clear:both}
+
+        @media only screen and (max-width: 600px) {
+            body {
+                background-color: lightblue;
+            }
+        }
+
     </style>
 </head>
 
@@ -87,11 +94,11 @@
         <h1>Kakai Runnable Server & Web Framework</h1>
         <h2 class="kakai">Beta Release v1.0</h2>
 
-        <p>Kakai is a standalone runnable server which contains everything
+        <p>Kakai standalone runnable server contains everything
             you need to create a full stack java application. Kakai handles
-            dependency injection, http routing, data persistence and data binding.
+            dependency injection, http routing, data persistence and page data binding
+            much like the jsp taglib.
         </p>
-
 
         <h3>Quick Start</h3>
         <p>Kakai can be bootstrapped in a matter of seconds. A quick walk through
@@ -148,7 +155,7 @@ gradle run</code>
         <h3>Browse:</h3>
         <pre>
             <code>
-http://localhost:8080</code>
+http://localhost:8080/</code>
         </pre>
 
         <p>The engine is built on the HttpServer by Sun. Thank you!
