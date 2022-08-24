@@ -6,7 +6,7 @@
 
     <meta name="keywords" content="java web framework, web framework, 2022, java, j2ee"/>
 
-    <link href="icon.png" rel="icon" type="image/png" />
+    <link href="kakai.png" rel="icon" type="image/png" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
@@ -16,18 +16,20 @@
         body{font-family: Arial;font-size:12px;}
         body,div,span,h1,h2,h3,h4,p,li,a{font-family: 'Roboto'; font-weight: 300; line-height: 1.0em;}
         h1{font-size:34px;}
-        h2{font-size:23px; font-weight: 800}
-        h3{font-size:19px; font-weight: 800}
+        h2{font-size:25px; font-weight: 800}
+        h3{font-size:21px; font-weight: 800}
         #left{float:left;}
         #wrapper{width:601px; margin-left:150px; text-align: left;}
         #information{float:left; margin-top:10px;}
-        #logo{display: block;height:150px; width:109px; position: relative; text-decoration: none;}
+        #logo{display: block;float:left;height:150px; width:109px; position: relative; text-decoration: none;}
         #e{z-index:4;position: absolute;right:0px;font-size:19px;}
         #bg{z-index: 1; position:absolute; left:20px;}
-        #logo-text{z-index:4;position: absolute; bottom:70px; right:0px; font-family: 'Kanit'; font-weight: 600; font-size: 32px; color:#000;}
+        #logo-text{z-index:4;position: absolute; bottom:70px; right:0px; font-family: 'Kanit'; font-weight: 600; font-size: 32px; color:#f5305b;color: #f83492;}
         #tagline{z-index:4;position: absolute; bottom:56px; right:0px; font-family: 'Kanit'; font-weight: 300; font-size: 13px; color:#000;}
-        #navigation li{list-style: none;}
-        #navigation a{font-size:13px; }
+        #navigation{float:right;}
+        #navigation li{list-style: none;float:right;margin:0px 10px;}
+        #navigation a{font-size:19px;text-decoration: none;color:#000; }
+        .kakai{color:#f83492}
         pre{
             font-size:14px;
             margin:0px auto 40px;
@@ -59,7 +61,7 @@
     </style>
 </head>
 
-<div id="left">
+<div id="header">
     <a href="index.html" id="logo">
 <!--        <svg id="bg">-->
 <!--            <style>-->
@@ -71,11 +73,11 @@
         <span id="logo-text">Kakai</span>
         <span id="tagline">runnable</span>
     </a>
-    <ul id="navigation">
-        <li><a href="index.html">About</a></li>
-        <li><a href="start.html">Getting Started</a></li>
-        <li><a href="start.html">Docs</a></li>
-    </ul>
+<!--    <ul id="navigation">-->
+<!--        <li><a href="start.html">Docs</a></li>-->
+<!--        <li><a href="start.html">Getting Started</a></li>-->
+<!--        <li><a href="index.html">Home</a></li>-->
+<!--    </ul>-->
 </div>
 
 
@@ -83,19 +85,22 @@
 
     <div id="information">
         <h1>Kakai Runnable Server & Web Framework</h1>
-        <p>Kakai is a standalone runnable server built with everything
+        <h2 class="kakai">Beta Release v1.0</h2>
+
+        <p>Kakai is a standalone runnable server which contains everything
             you need to create a full stack java application. Kakai handles
             dependency injection, http routing, data persistence and data binding.
         </p>
 
-        <h2>Quick Start</h2>
+
+        <h3>Quick Start</h3>
         <p>Kakai can be bootstrapped in a matter of seconds. A quick walk through
         using gradle.</p>
 
         <h3>Gradle</h3>
         <pre>
             <code>
-implements "io.kakai:kakai:1.0"</code>
+implementation "io.kakai:kakai:1.0"</code>
         </pre>
 
         <p>A main entry point for our application.</p>
@@ -111,7 +116,7 @@ public class Main {
 }</code>
         </pre>
 
-        <p>A Router is synonymous with Controller in the MVC dialect. A
+        <p>A Router is synonymous with Controller in the MVC world. A
         router can handle many endpoints. Example:</p>
 
         <h3>HelloRouter.java</h3>
@@ -130,6 +135,33 @@ public class HelloRouter {
 
 }</code>
         </pre>
+
+
+        <p>Then its as simple as running the following command.</p>
+
+        <h3>Run it!</h3>
+        <pre>
+            <code>
+gradle run</code>
+        </pre>
+
+        <h3>Browse:</h3>
+        <pre>
+            <code>
+http://localhost:8080</code>
+        </pre>
+
+        <p>The engine is built on the HttpServer by Sun. Thank you!
+            Thank you for making Java complete with
+        everything you could ever wish for in a programming language, object
+        orientation, concurrency, meta programming with annotations, reflection,
+            and its free. Earth's greatest philanthropists.</p>
+
+        <p>Thank you OpenJDK for continuing to make it free! You guys are the
+        greatest!</p>
+
+
+        <p>For support contact croteau.mike@gmail.com</p>
 
     </div>
 
