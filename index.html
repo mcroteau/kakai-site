@@ -17,7 +17,7 @@
         body,div,span,h1,h2,h3,h4,p,li,a{font-family: 'Roboto'; font-weight: 300; line-height: 1.0em;}
         h1{font-size:34px;}
         h2{font-size:23px; font-weight: 800}
-        h3{font-size:17px;}
+        h3{font-size:19px; font-weight: 800}
         #left{float:left;}
         #wrapper{width:601px; margin-left:150px; text-align: left;}
         #information{float:left; margin-top:10px;}
@@ -88,16 +88,18 @@
             dependency injection, http routing, data persistence and data binding.
         </p>
 
-        <h2>Gradle</h2>
+        <h2>Quick Start</h2>
+        <p>Kakai can be bootstrapped in a matter of seconds. A quick walk through
+        using gradle.</p>
+
+        <h3>Gradle</h3>
         <pre>
             <code>
-dependencies {
-    implements "io.kakai:kakai:1.0"
-}</code>
+implements "io.kakai:kakai:1.0"</code>
         </pre>
 
-
-
+        <p>A main entry point for our application.</p>
+        <h3>Main.java</h3>
         <pre>
             <code>
 import io.kakai.Kakai;
@@ -108,7 +110,30 @@ public class Main {
     }
 }</code>
         </pre>
+
+        <p>A Router is synonymous with Controller in the MVC dialect. A
+        router can handle many endpoints. Example:</p>
+
+        <h3>HelloRouter.java</h3>
+        <pre>
+            <code>
+import io.kakai.annotate.Router;
+
+@Router
+public class HelloRouter {
+
+     @Text
+     @Get("/")
+     public String hello(){
+        return "hello world.";
+     }
+
+}</code>
+        </pre>
+
     </div>
+
+
 
     <br class="clear"/>
 </div>
