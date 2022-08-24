@@ -4,17 +4,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <meta name="keywords" content="java web framework, java, j2ee"/>
+    <meta name="keywords" content="java web framework, web framework, 2022, java, j2ee"/>
 
     <link href="icon.png" rel="icon" type="image/png" />
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap');
+    </style>
+    <style>
         body{font-family: Arial;font-size:12px;}
-        #wrapper{width:190px; margin:auto; text-align: left;}
-        #wrapper img{width:180px;}
-        #wrapper #right{ width:170px; margin-top:20px; color:#232323}
+        body,div,span,h1,h2,h3,h4,p,li,a{font-family: 'Roboto'; font-weight: 300; line-height: 1.0em;}
+        h1{font-size:34px;}
+        h2{font-size:23px; font-weight: 800}
+        h3{font-size:17px;}
+        #left{float:left;}
+        #wrapper{width:601px; margin-left:150px; text-align: left;}
+        #information{float:left; margin-top:10px;}
+        #logo{display: block;height:150px; width:109px; position: relative; text-decoration: none;}
+        #e{z-index:4;position: absolute;right:0px;font-size:19px;}
+        #bg{z-index: 1; position:absolute; left:20px;}
+        #logo-text{z-index:4;position: absolute; bottom:70px; right:0px; font-family: 'Kanit'; font-weight: 600; font-size: 32px; color:#000;}
+        #tagline{z-index:4;position: absolute; bottom:56px; right:0px; font-family: 'Kanit'; font-weight: 300; font-size: 13px; color:#000;}
+        #navigation li{list-style: none;}
+        #navigation a{font-size:13px; }
+        pre{
+            font-size:14px;
+            margin:0px auto 40px;
+            padding:0px 20px;
+            text-align: left;
+            background: #1f2021;
+            border:dotted 1px #000000;
+            overflow: scroll;
+            word-wrap: normal;
+            white-space: pre !important;
+            line-break: normal;
+            text-align: left;
+            line-height: 1.4em;
+        }
+        code{
+            font-family: 'Fira Code';
+            overflow: scroll;
+            white-space: pre !important;
+            line-break: normal;
+            text-align: left;
+            color:#fff;
+        }
+        p{
+            font-size:21px;
+            line-height: 1.7em;
+            margin:0px auto 20px;
+        }
+        .clear{clear:both}
     </style>
 </head>
+
+<div id="left">
+    <a href="index.html" id="logo">
+<!--        <svg id="bg">-->
+<!--            <style>-->
+<!--                .s0 { fill: #f9ff00; }-->
+<!--            </style>-->
+<!--            <path id="bg" class="s0" d="m12 24.1h43.9l28.1 72h-46.9z"/>-->
+<!--        </svg>-->
+        <span id="e">>_ </span>
+        <span id="logo-text">Kakai</span>
+        <span id="tagline">runnable</span>
+    </a>
+    <ul id="navigation">
+        <li><a href="index.html">About</a></li>
+        <li><a href="start.html">Getting Started</a></li>
+        <li><a href="start.html">Docs</a></li>
+    </ul>
+</div>
+
+
 <div id="wrapper">
 
+    <div id="information">
+        <h1>Kakai Runnable Server & Web Framework</h1>
+        <p>Kakai is a standalone runnable server built with everything
+            you need to create a full stack java application. Kakai handles
+            dependency injection, http routing, data persistence and data binding.
+        </p>
+
+        <h2>Gradle</h2>
+        <pre>
+            <code>
+dependencies {
+    implements "io.kakai:kakai:1.0"
+}</code>
+        </pre>
+
+
+
+        <pre>
+            <code>
+import io.kakai.Kakai;
+
+public class Main {
+    public static void main(String[] args){
+        new Kakai(8080).start();
+    }
+}</code>
+        </pre>
+    </div>
+
+    <br class="clear"/>
 </div>
 </html>
