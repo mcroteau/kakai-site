@@ -18,9 +18,9 @@
         h1{font-size:34px;}
         h2{font-size:25px; font-weight: 800}
         h3{font-size:21px; font-weight: 800}
-        #wrapper{width:601px; margin-left:150px; text-align: left;}
+        #wrapper{width:601px; margin-left:162px; text-align: left;}
         #information{float:left; margin-top:10px;}
-        #logo{display: block;float:left;height:150px; width:109px; position: relative; text-decoration: none;}
+        #logo{display: block;position:fixed;top:20px;left:13px;height:150px; width:89px;text-decoration: none;}
         #e{z-index:4;position: absolute;right:0px;font-family: 'Kanit'; font-weight: 300;font-size:19px; color:#000}
         #bg{z-index: 1; position:absolute; left:20px;}
         #logo-text{z-index:4;position: absolute; bottom:70px; right:0px; font-family: 'Kanit'; font-weight: 600; font-size: 32px; color:#f5305b;color: #f83492;}
@@ -57,10 +57,9 @@
         }
         .clear{clear:both}
 
-        @media only screen and (max-width: 600px) {
-            body {
-                background-color: lightblue;
-            }
+        @media only screen and (max-width: 790px) {
+            #logo{display:block;position:relative;margin:0px}
+            #wrapper{width:calc(100% - 40px);padding:0px 20px;margin:0px;}
         }
 
     </style>
