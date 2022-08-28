@@ -95,10 +95,34 @@
         <p>Kakai can be bootstrapped in a matter of seconds. A quick walk through
         using gradle.</p>
 
-        <h3>Gradle</h3>
+        <h3>Dependency</h3>
         <pre>
             <code>
 implementation "io.kakai:kakai:1.00"</code>
+        </pre>
+
+        <h3>build.gradle</h3>
+        <pre>
+            <code>
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'foo'
+version '1.0-SNAPSHOT'
+
+application{
+    mainClass.set("foo.Main")
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "io.kakai:kakai:1.00"
+}</code>
         </pre>
 
 
@@ -113,6 +137,7 @@ kakai.env=basic</code>
         <h3>Main.java</h3>
         <pre>
             <code>
+package foo;
 import io.kakai.Kakai;
 
 public class Main {
@@ -128,6 +153,10 @@ public class Main {
         <h3>HelloRouter.java</h3>
         <pre>
             <code>
+package foo;
+
+import io.kakai.annotate.verbs.Get;
+import io.kakai.annotate.Text;
 import io.kakai.annotate.Router;
 
 @Router
@@ -141,7 +170,6 @@ public class HelloRouter {
 
 }</code>
         </pre>
-
 
         <p>Then its as simple as running the following command.</p>
 
