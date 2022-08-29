@@ -1,0 +1,382 @@
+<html>
+<head>
+    <title>Kakai : Runnable Server & Framework</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta name="keywords" content="java web framework, web framework, 2022, java, j2ee"/>
+
+    <link href="kakai.png" rel="icon" type="image/png" />
+    <link rel="stylesheet" href="default.css">
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+<div id="github-actions">
+    <a class="github-button" href="https://github.com/sponsors/mcroteau" data-color-scheme="no-preference: light_high_contrast; light: light; dark: dark;" data-icon="octicon-heart" data-size="large" aria-label="Sponsor @mcroteau on GitHub">Sponsor</a>
+    <a class="github-button" href="https://github.com/mcroteau/kakai" data-color-scheme="no-preference: light_high_contrast; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="false" aria-label="Star mcroteau/kakai on GitHub">Star</a>
+</div>
+
+<div id="header">
+    <a href="index.html" id="logo">
+        <span id="e">>_ </span>
+        <span id="logo-text">Kakai</span>
+        <span id="tagline">runnable</span>
+    </a>
+
+    <div class="divider"></div>
+
+    <ul id="navigation">
+        <li><a href="start.html">/Quick Start</a></li>
+        <li><a href="index.html">/Index</a></li>
+    </ul>
+</div>
+
+
+<div id="wrapper">
+
+    <div id="information">
+        <h1>Media Player</h1>
+        <h2 class="kakai">Quick Start Example</h2>
+
+        <p>In this example we are going to create a very basic media player.
+            I'll spare verbage and just render the necessary code.
+        </p>
+
+        <h3>Quick Start</h3>
+        <p>In this example we will use Gradle although you can use and
+            build system that allows you to run the project
+            from the command line.</p>
+
+        <h3>build.gradle</h3>
+        <pre>
+            <code>
+plugins {
+    id 'application'
+}
+
+application{
+    mainClass.set("io.kakai.Main")
+}
+
+group 'io.kakai'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "io.kakai:kakai:1.04"
+}</code>
+        </pre>
+
+        <p>We need our project schema</p>
+
+        <h3>src/main/resources/schema.sql</h3>
+
+        <pre>
+            <code>
+create table media (
+	id bigint PRIMARY KEY AUTO_INCREMENT,
+	uri character varying(254) NOT NULL,
+	title character varying(254) NOT NULL,
+	artist character varying(254) NOT NULL
+);</code>
+        </pre>
+
+        <p>Now we need our domain model.</p>
+        <h3>Media.java</h3>
+
+        <pre>
+            <code>
+package io.kakai;
+
+public class Media {
+    Integer id;
+    String uri;
+    String title;
+    String artist;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+}</code>
+        </pre>
+
+        <p>A main entry point for our application.</p>
+        <h3>Main.java</h3>
+        <pre>
+            <code>
+package io.kakai;
+
+import io.kakai.annotate.Application;
+import io.kakai.resources.Environments;
+
+@Application(Environments.DEVELOPMENT)
+public class Main {
+    public static void main(String[] args){
+        new Kakai(8080).start();
+    }
+}
+</code>
+        </pre>
+
+        <p>A Router is synonymous with Controller in the MVC world. A
+            router can handle many endpoints. Example:</p>
+
+        <h3>HelloRouter.java</h3>
+        <pre>
+            <code>
+package io.kakai;
+
+import com.sun.net.httpserver.Headers;
+import com.sun.net.httpserver.HttpExchange;
+import io.kakai.annotate.Bind;
+import io.kakai.annotate.Design;
+import io.kakai.annotate.Router;
+import io.kakai.annotate.Variable;
+import io.kakai.annotate.http.Get;
+import io.kakai.annotate.http.Post;
+import io.kakai.model.web.FormComponent;
+import io.kakai.model.web.HttpRequest;
+import io.kakai.model.web.HttpResponse;
+import io.kakai.resources.MimeGetter;
+
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+@Router
+public class MediaRouter {
+
+    @Bind
+    Kakai kakai;
+
+    @Get("/")
+    @Design("/pages/default.jsp")
+    public String index(HttpResponse resp){
+        String sql = "select * from media";
+        List&lt;Media&gt; music = (ArrayList) kakai.getList(sql, new Object[]{}, Media.class);
+        resp.set("music", music);
+        return "/pages/index.jsp";
+    }
+
+    @Get("/view/upload")
+    @Design("/pages/default.jsp")
+    public String upload(){
+        return "/pages/upload.jsp";
+    }
+
+    @Post("/upload")
+    public String upload(HttpRequest req, HttpResponse resp) throws IOException {
+        FormComponent formComponent = req.getFormComponent("media");
+
+        String title = req.value("title");
+        String artist = req.value("artist");
+        String uri = formComponent.getFileName();
+
+        Path mediaPath = Paths.get("web-ux", "resources", "media");
+        String completeMediaDirPath = mediaPath.toAbsolutePath().toString();
+        File mediaDir = new File(completeMediaDirPath);
+        if(!mediaDir.exists()){
+            mediaDir.mkdirs();
+        }
+
+        Path path = Paths.get("web-ux", "resources", "media", uri);
+        File file = new File(path.toAbsolutePath().toString());
+        if(file.exists()){
+            resp.set("message", "Song exists.");
+            return "[redirect]/upload";
+        }
+
+        OutputStream os = new FileOutputStream(file);
+        os.write(formComponent.getFileBytes());
+        os.flush();
+        os.close();
+
+        String locateSql = "select * from media where uri = '[+]'";
+        Media storedMedia = (Media) kakai.get(locateSql, new Object[]{ uri }, Media.class);
+
+        if(storedMedia != null){
+            resp.set("message", "Song exists.");
+            return "[redirect]/upload";
+        }
+
+        Media media = new Media();
+        media.setUri(uri);
+        media.setTitle(title);
+        media.setArtist(artist);
+
+        String saveSql = "insert into media (uri, title, artist) values ('[+]','[+]','[+]')";
+        kakai.save(saveSql, new Object[]{
+                media.getUri(),
+                media.getTitle(),
+                media.getArtist()
+        });
+
+        resp.set("message", "Successfully uploaded media!");
+        return "[redirect]/";
+    }
+
+    @io.kakai.annotate.Media
+    @Get("/listen/{id}")
+    public String listen(@Variable Integer id, HttpExchange httpExchange) throws IOException {
+
+        String sql = "select * from media where id = [+]";
+        Media storedMedia = (Media) kakai.get(sql, new Object[]{ id }, Media.class);
+
+        Path path = Paths.get("web-ux", "resources", "media", storedMedia.uri);
+        String completePath = path.toAbsolutePath().toString();
+
+        File file = new File(completePath);
+        FileInputStream inputStream = new FileInputStream(file);
+        byte[] bytes = new byte[(int)file.length()];
+
+        MimeGetter mimeGetter = new MimeGetter(completePath);
+        Headers headers = httpExchange.getResponseHeaders();
+        headers.add("content-type", mimeGetter.resolve());
+        httpExchange.sendResponseHeaders(200, bytes.length);
+
+        OutputStream outputStream = httpExchange.getResponseBody();
+
+        int bytesRead;
+        try {
+            while ((bytesRead = inputStream.read(bytes, 0, bytes.length)) != -1) {
+                outputStream.write(bytes, 0, bytesRead);
+            }
+
+            inputStream.close();
+            outputStream.flush();
+            outputStream.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+}</code>
+        </pre>
+
+
+        <p>We need views. We will Kakai's page data binding to bind
+        data to our page. We could have used literally any file extension
+        for our views, in this example and in our work we still use .jsp or
+        .html for IDE support.</p>
+
+        <h3>web-ux/pages/index.jsp</h3>
+        <pre>
+            <code>
+&lt;table&gt;
+    &lt;kakai:iterate items="${music}" var="song"&gt;
+        &lt;tr&gt;
+            &lt;td&gt;${song.id}&lt;/td&gt;
+            &lt;td&gt;${song.title}&lt;/td&gt;
+            &lt;td&gt;${song.artist}&lt;/td&gt;
+            &lt;td&gt;&lt;audio src="/listen/${song.id}" controls&gt;&lt;/audio&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/kakai:iterate&gt;
+&lt;/table&gt;</code>
+        </pre>
+
+        <p>Next we need our music upload form.</p>
+
+        <h3>web-ux/pages/upload.jsp</h3>
+        <pre>
+            <code>
+&lt;h3&gt;Upload Music&lt;/h3&gt;
+&lt;form action="/upload" method="post" enctype="multipart/form-data"&gt;
+    &lt;label&gtTitle&lt;/label&gt;
+    &lt;input type="text" name="title" value=""/&gt;
+    &lt;label&gtArtist&lt;/label&gt;
+    &lt;input type="text" name="artist" value=""/&gt;
+
+    &lt;lable&gtSong&lt;/lable&gt;
+    &lt;input type="file" name="media" value=""/&gt;
+
+    &lt;input type="submit" value="Upload"/&gt;
+&lt;/form&gt;</code>
+        </pre>
+
+        <p>Now we need our template. For simplicity we are going to put it
+        in the same directory as the other two views.</p>
+
+        <h3>web-ux/pages/default.jsp</h3>
+        <pre>
+            <code>
+&lt;h1&gt;Media Player&lt;/h1&gt;
+&lt;a href="/view/upload"&gt;Upload Song&lt;/a&gt;
+&lt;kakai:content/&gt;
+            </code>
+        </pre>
+
+        <p>Now run the following command.</p>
+
+        <h3>Run:</h3>
+        <pre>
+            <code>
+gradle run</code>
+        </pre>
+
+        <h3>Browse:</h3>
+        <pre>
+            <code>
+http://localhost:8080/</code>
+        </pre>
+
+        <h2 class="kakai">Persist.</h2>
+        <p>The source for this project if you run into problems can be found
+        in the <strong>examples/media-player/</strong> directory in the
+            main kakai project located at http://github.com/mcroteau/kakai.</p>
+
+        <p>Here is a sample song by Men We Trust. We really do.
+        Feel free to download it for application testing.</p>
+
+        <audio src="effort.mp3" controls></audio>
+
+        <p>For support contact croteau.mike@gmail.com</p>
+
+    </div>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-K1JDF83WNC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-K1JDF83WNC');
+    </script>
+
+    <br class="clear"/>
+</div>
+
+</html>

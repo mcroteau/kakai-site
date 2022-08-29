@@ -7,69 +7,12 @@
     <meta name="keywords" content="java web framework, web framework, 2022, java, j2ee"/>
 
     <link href="kakai.png" rel="icon" type="image/png" />
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap');
-    </style>
-    <style>
-        body{background: #faffff;font-family: Arial;font-size:12px;}
-        body,div,span,h1,h2,h3,h4,p,li,a{font-family: 'Roboto'; font-weight: 300; line-height: 1.0em;}
-        h1{font-size:34px;}
-        h2{font-size:25px; font-weight: 800}
-        h3{font-size:21px; font-weight: 800}
-        #wrapper{width:601px; margin-left:162px; text-align: left;}
-        #information{float:left; margin-top:10px;}
-        #logo{display: block;position:fixed;top:20px;left:13px;height:150px; width:89px;text-decoration: none;}
-        #e{z-index:4;position: absolute;right:0px;font-family: 'Kanit'; font-weight: 300;font-size:19px; color:#000}
-        #bg{z-index: 1; position:absolute; left:20px;}
-        #logo-text{z-index:4;position: absolute; bottom:70px; right:0px; font-family: 'Kanit'; font-weight: 600; font-size: 32px; color:#f5305b;color: #f83492;}
-        #tagline{z-index:4;position: absolute; bottom:56px; right:0px; font-family: 'Kanit'; font-weight: 300; font-size: 13px; color:#000;}
-        #navigation li{list-style: none;float:right;margin:0px 10px;}
-        #navigation a{font-size:19px;text-decoration: none;color:#000; }
-        .kakai{color:#f83492}
-        pre{
-            font-size:14px;
-            margin:0px auto 40px;
-            padding:0px 20px;
-            text-align: left;
-            background: #1f2021;
-            border:dotted 1px #000000;
-            overflow: scroll;
-            word-wrap: normal;
-            white-space: pre !important;
-            line-break: normal;
-            text-align: left;
-            line-height: 1.4em;
-        }
-        code{
-            font-family: 'Fira Code';
-            overflow: scroll;
-            white-space: pre !important;
-            line-break: normal;
-            text-align: left;
-            color:#fff;
-        }
-        p{
-            font-size:21px;
-            line-height: 1.7em;
-            margin:0px auto 20px;
-        }
-        .clear{clear:both}
-
-        @media only screen and (max-width: 790px) {
-            #logo{display:block;position:relative;margin:0px}
-            #wrapper{width:calc(100% - 40px);padding:0px 20px;margin:0px;}
-        }
-
-        #github-actions{text-align: right;}
-    </style>
+    <link rel="stylesheet" href="default.css">
 
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 
 <div id="github-actions">
-    <!-- Place this tag where you want the button to render. -->
     <a class="github-button" href="https://github.com/sponsors/mcroteau" data-color-scheme="no-preference: light_high_contrast; light: light; dark: dark;" data-icon="octicon-heart" data-size="large" aria-label="Sponsor @mcroteau on GitHub">Sponsor</a>
     <a class="github-button" href="https://github.com/mcroteau/kakai" data-color-scheme="no-preference: light_high_contrast; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="false" aria-label="Star mcroteau/kakai on GitHub">Star</a>
 </div>
@@ -80,12 +23,13 @@
         <span id="logo-text">Kakai</span>
         <span id="tagline">runnable</span>
     </a>
-<!--    <ul id="navigation">-->
-<!--        <li><a href="start.html">Docs</a></li>-->
-<!--        <li><a href="start.html">Getting Started</a></li>-->
-<!--        <li><a href="index.html">Home</a></li>-->
-<!--    </ul>-->
-    <!-- Place this tag where you want the button to render. -->
+
+    <div class="divider"></div>
+
+    <ul id="navigation">
+        <li><a href="start.html">/Quick Start</a></li>
+        <li><a href="index.html">/Index</a></li>
+    </ul>
 </div>
 
 
@@ -93,7 +37,7 @@
 
     <div id="information">
         <h1>Kakai Runnable Server & Web Framework</h1>
-        <h2 class="kakai">Beta Release v1.02</h2>
+        <h2 class="kakai">Beta Release v1.04</h2>
 
         <p>Kakai runnable server contains everything
             you need to create a full stack java application. Kakai handles
@@ -104,12 +48,6 @@
         <h3>Quick Start</h3>
         <p>Kakai can be bootstrapped in a matter of seconds. A quick walk through
         using gradle.</p>
-
-        <h3>Dependency</h3>
-        <pre>
-            <code>
-implementation "io.kakai:kakai:1.02"</code>
-        </pre>
 
         <h3>build.gradle</h3>
         <pre>
@@ -131,17 +69,9 @@ repositories {
 }
 
 dependencies {
-    implementation "io.kakai:kakai:1.02"
+    implementation "io.kakai:kakai:1.04"
 }</code>
         </pre>
-
-
-        <h3>src/main/resources/kakai.props</h3>
-        <pre>
-            <code>
-kakai.env=basic</code>
-        </pre>
-
 
         <p>A main entry point for our application.</p>
         <h3>Main.java</h3>
@@ -149,11 +79,14 @@ kakai.env=basic</code>
             <code>
 package foo;
 import io.kakai.Kakai;
+import io.kakai.annotate.Application;
+import io.kakai.resources.Environments;
 
+@Application(Environments.DEVELOPMENT)
 public class Main {
-    public static void main(String[] args){
-        new Kakai(8080).start();
-    }
+	public static void main(String[] args){
+		new Kakai(8080).start();
+	}
 }</code>
         </pre>
 
@@ -165,7 +98,7 @@ public class Main {
             <code>
 package foo;
 
-import io.kakai.annotate.verbs.Get;
+import io.kakai.annotate.http.Get;
 import io.kakai.annotate.Text;
 import io.kakai.annotate.Router;
 
@@ -235,7 +168,7 @@ http://localhost:8080/</code>
             Sun Valley Trailer Park Nevada, Mexico, Philippines, India... or any other struggling nation or
             people have an opportunity to ideate, dream & build. Thank you!</p>
 
-        <p>I have to say it, go fuck yourselves Microsoft, Bill Gates, Steve Balmer.
+        <p>Go fuck yourselves Microsoft, Bill Gates, Steve Balmer.
             Now that's true Freedom! God Bless the USA</p>
 
         <p>For support contact croteau.mike@gmail.com</p>
@@ -252,4 +185,5 @@ http://localhost:8080/</code>
 
     <br class="clear"/>
 </div>
+
 </html>

@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap');
+
+body{background: #faffff;font-family: Arial;font-size:12px;}
+body,div,span,h1,h2,h3,h4,p,li,a{font-family: 'Roboto'; font-weight: 300; line-height: 1.0em;}
+h1{font-size:34px;}
+h2{font-size:25px; font-weight: 800}
+h3{font-size:21px; font-weight: 800}
+#wrapper{width:601px; margin-left:162px; text-align: left;float:left;}
+#information{float:left; margin-top:10px;}
+#logo{display: block;position:fixed;top:20px;left:13px;height:150px; width:89px;text-decoration: none;}
+#e{z-index:4;position: absolute;right:0px;font-family: 'Kanit'; font-weight: 300;font-size:19px; color:#000}
+#bg{z-index: 1; position:absolute; left:20px;}
+#logo-text{z-index:4;position: absolute; bottom:70px; right:0px; font-family: 'Kanit'; font-weight: 600; font-size: 32px; color:#f5305b;color: #f83492;}
+#tagline{z-index:4;position: absolute; bottom:56px; right:0px; font-family: 'Kanit'; font-weight: 300; font-size: 13px; color:#000;}
+.divider{margin-left:162px;width:601px;}
+#navigation{}
+#navigation li{list-style: none;float:right;margin:0px 10px;}
+#navigation a{font-family:'Roboto';font-weight:300;font-size:16px;text-decoration: none;color: #000; }
+.kakai{color:#f83492}
+pre{
+    font-size:12px;
+    margin:0px auto 40px;
+    padding:0px 20px;
+    text-align: left;
+    background: #1f2021;
+    border:dotted 1px #000000;
+    overflow: scroll;
+    word-wrap: normal;
+    white-space: pre !important;
+    line-break: normal;
+    text-align: left;
+    line-height: 1.4em;
+}
+code{
+    font-family: 'Fira Code';
+    overflow: scroll;
+    white-space: pre !important;
+    line-break: normal;
+    text-align: left;
+    color:#fff;
+}
+p{
+    font-size:21px;
+    line-height: 1.7em;
+    margin:0px auto 20px;
+}
+.clear{clear:both}
+
+@media only screen and (max-width: 790px) {
+    #logo{display:block;position:relative;margin:0px}
+    #wrapper{width:calc(100% - 40px);padding:0px 20px;margin:0px;}
+}
+
+#github-actions{text-align: right;}
